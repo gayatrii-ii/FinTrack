@@ -1,0 +1,10 @@
+import { z } from 'zod';
+
+export const createCategorySchema = z.object({
+  body: z.object({
+    name: z.string().min(1, 'Category name is required').max(50),
+    type: z.enum(['INCOME', 'EXPENSE']),
+    icon: z.string().optional(),
+    color: z.string().optional(),
+  }),
+});
