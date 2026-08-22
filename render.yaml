@@ -2,6 +2,7 @@ services:
   - type: web
     name: fintrack-api
     runtime: node
+    plan: free
     rootDir: server
     buildCommand: npm install && npm run build
     startCommand: npm start
