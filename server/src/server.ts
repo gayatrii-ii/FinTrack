@@ -4,23 +4,13 @@ import { config } from './config/env';
 import routes from './routes';
 import { errorHandler } from './middleware/error.middleware';
 import prisma from './config/prisma';
+import { ensureDemoDataExists } from './utils/seedHelper';
 
 const app = express();
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (
-        config.nodeEnv === 'development' ||
-        origin === config.clientUrl ||
-        origin.startsWith('http://localhost') ||
-        origin.startsWith('http://127.0.0.1')
-      ) {
-        return callback(null, true);
-      }
-      callback(new Error('Not allowed by CORS'));
-    },
+    origin: true,
     credentials: true,
   })
 );
@@ -69,9 +59,10 @@ app.use(errorHandler);
 
 const PORT = config.port;
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, async () => {
   console.log(`[FinTrack Server] Running on http://localhost:${PORT}`);
   console.log(`[FinTrack Server] Environment: ${config.nodeEnv}`);
+  await ensureDemoDataExists();
 });
 
 const shutdown = async () => {
