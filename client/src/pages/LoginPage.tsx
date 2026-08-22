@@ -30,7 +30,7 @@ export const LoginPage: React.FC = () => {
       success('Welcome back to FinTrack!');
       navigate('/');
     } catch (err: any) {
-      const msg = err.response?.data?.error || 'Failed to login. Please check your credentials.';
+      const msg = err.response?.data?.error || (err.message === 'Network Error' ? 'Network Error: Cannot reach backend server.' : err.message) || 'Failed to login. Please check your credentials.';
       setErrorMessage(msg);
       toastError(msg);
     } finally {
