@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { AuthRequest } from '../middleware/auth.middleware';
 import { AnalyticsService } from '../services/analytics.service';
 import { sendSuccess } from '../utils/response';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '../types';
 
 export class AnalyticsController {
   static async getOverview(req: AuthRequest, res: Response, next: NextFunction) {

@@ -1,5 +1,5 @@
 import prisma from '../config/prisma';
-import { Frequency, RecurringStatus, TransactionType } from '@prisma/client';
+import { Frequency, RecurringStatus, TransactionType } from '../types';
 import { AppError } from '../middleware/error.middleware';
 
 export interface CreateRecurringDto {
@@ -208,7 +208,7 @@ export class RecurringService {
         },
       });
 
-      const nextDate = this.calculateNextOccurrence(rec.nextOccurrence, rec.frequency);
+      const nextDate = this.calculateNextOccurrence(rec.nextOccurrence, rec.frequency as Frequency);
 
       await prisma.recurringTransaction.update({
         where: { id: rec.id },

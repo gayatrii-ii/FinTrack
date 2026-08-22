@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { AuthRequest } from '../middleware/auth.middleware';
 import { CategoryService } from '../services/category.service';
 import { sendSuccess } from '../utils/response';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '../types';
 
 export class CategoryController {
   static async getCategories(req: AuthRequest, res: Response, next: NextFunction) {

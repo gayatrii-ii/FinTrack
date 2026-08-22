@@ -1,5 +1,5 @@
 import prisma from '../config/prisma';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '../types';
 import { AppError } from '../middleware/error.middleware';
 
 export const defaultSystemCategories = [
@@ -61,7 +61,7 @@ export class CategoryService {
     const existing = await prisma.category.findFirst({
       where: {
         userId,
-        name: { equals: data.name, mode: 'insensitive' },
+        name: data.name,
         type: data.type,
       },
     });

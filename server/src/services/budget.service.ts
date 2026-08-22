@@ -1,5 +1,5 @@
 import prisma from '../config/prisma';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '../types';
 import { AppError } from '../middleware/error.middleware';
 
 export interface CreateBudgetDto {

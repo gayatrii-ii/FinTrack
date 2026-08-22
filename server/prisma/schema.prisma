@@ -3,27 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
-}
-
-enum TransactionType {
-  INCOME
-  EXPENSE
-}
-
-enum Frequency {
-  DAILY
-  WEEKLY
-  BIWEEKLY
-  MONTHLY
-  YEARLY
-}
-
-enum RecurringStatus {
-  ACTIVE
-  PAUSED
-  CANCELLED
 }
 
 model User {
@@ -47,7 +28,7 @@ model Category {
   id                    String                 @id @default(uuid())
   userId                String?
   name                  String
-  type                  TransactionType
+  type                  String
   icon                  String?
   color                 String?
   isSystem              Boolean                @default(false)
@@ -70,7 +51,7 @@ model Transaction {
   categoryId            String
   recurringId           String?
   amount                Float
-  type                  TransactionType
+  type                  String
   description           String
   date                  DateTime
   isRecurring           Boolean                @default(false)
@@ -115,11 +96,11 @@ model RecurringTransaction {
   title                 String
   description           String?
   amount                Float
-  type                  TransactionType
-  frequency             Frequency              @default(MONTHLY)
+  type                  String
+  frequency             String                 @default("MONTHLY")
   startDate             DateTime               @default(now())
   nextOccurrence        DateTime
-  status                RecurringStatus        @default(ACTIVE)
+  status                String                 @default("ACTIVE")
   lastProcessedAt       DateTime?
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt

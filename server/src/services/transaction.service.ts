@@ -1,5 +1,5 @@
 import prisma from '../config/prisma';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '../types';
 import { AppError } from '../middleware/error.middleware';
 
 export interface GetTransactionsFilter {
@@ -55,7 +55,6 @@ export class TransactionService {
     if (filter.search && filter.search.trim() !== '') {
       where.description = {
         contains: filter.search.trim(),
-        mode: 'insensitive',
       };
     }
 

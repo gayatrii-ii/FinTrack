@@ -1,5 +1,5 @@
 import prisma from '../config/prisma';
-import { TransactionType } from '@prisma/client';
+import { TransactionType } from '../types';
 
 export class AnalyticsService {
   private static parseDateRange(startDateStr?: string, endDateStr?: string) {
