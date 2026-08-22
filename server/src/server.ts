@@ -1,5 +1,10 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = 'file:./dev.db';
+}
+
 import { config } from './config/env';
 import routes from './routes';
 import { errorHandler } from './middleware/error.middleware';
