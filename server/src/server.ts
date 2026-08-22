@@ -28,6 +28,16 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({
+    name: 'FinTrack API',
+    status: 'online',
+    version: '1.0.0',
+    health: '/api/health',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get('/api/health', async (_req: Request, res: Response) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
